@@ -6,7 +6,7 @@ import calculations
 
 load_dotenv()
 currencys = {}
-exchange_rates = calculations.get_course_list()  # Предположим, что это словарь с поддерживаемыми валютами
+exchange_rates = calculations.get_course_list()
 token = os.getenv('TG_BOT_TOKEN')
 bot = telebot.TeleBot(token)
 
@@ -17,10 +17,10 @@ def get_source_currency(message):
     bot.register_next_step_handler(message, check_source_currency)
 
 def check_source_currency(message):
-    source_currency = message.text.strip().upper()  # Убираем лишние пробелы и приводим к верхнему регистру
+    source_currency = message.text.strip().upper()
     if source_currency not in exchange_rates:
         bot.send_message(message.chat.id, 'Неверный или отсутствующий код валюты! Попробуйте снова.')
-        get_source_currency(message)  # Перезапускаем ввод кода валюты
+        get_source_currency(message)
     else:
         currencys[message.chat.id]['source_currency'] = source_currency
         converting_currency = bot.send_message(message.chat.id, 'Введите код валюты, в которую будет происходить конвертация')
@@ -30,7 +30,7 @@ def check_converting_currency(message):
     converting_currency = message.text.strip().upper()
     if converting_currency not in exchange_rates:
         bot.send_message(message.chat.id, 'Неверный или отсутствующий код валюты! Попробуйте снова.')
-        get_source_currency(message)  # Возвращаемся к вводу начальной валюты
+        get_source_currency(message)
     else:
         currencys[message.chat.id]['converting_currency'] = converting_currency
         currency_amount = bot.send_message(message.chat.id, 'Введите количество валюты, которое хотите конвертировать')
