@@ -5,7 +5,7 @@ def get_course_list():
     url = 'https://www.cbr-xml-daily.ru/daily_json.js'
     response = requests.get(url)
     response.raise_for_status()
-    return response.json()
+    return response.json()['Valute']
 
 
 def convertation(original, converting_currency, amount):

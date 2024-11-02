@@ -40,7 +40,7 @@ def get_currency_amount(message):
     try:
         currency_amount = float(message.text.strip())
         currencys[message.chat.id]['currency_amount'] = currency_amount
-        bot.send_message(message.chat.id, f'Переводим {currencys[message.chat.id]["source_currency"]} в {currencys[message.chat.id]["converting_currency"]} на сумму {currency_amount}.')
+        bot.send_message(message.chat.id, f'Переводим {currencys[message.chat.id]["source_currency"]} в {currencys[message.chat.id]["converting_currency"]} на сумму {currency_amount}.....')
         convertating(message)
     except ValueError:
         bot.send_message(message.chat.id, 'Пожалуйста, введите корректное число!')
