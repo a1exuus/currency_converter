@@ -1,9 +1,9 @@
 import requests
 
 
-def get_exchange_rates():
-    url = 'https://api.nbrb.by/exrates/rates?periodicity=0'
-    response = requests.get(url)
+def get_currency_list(token):
+    url = 'https://currate.ru/api/'
+    response = requests.get(url, params={'get': 'currency_list', 'key': token})
     response.raise_for_status()
     return response.json()
 
