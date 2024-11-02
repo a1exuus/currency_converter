@@ -1,9 +1,9 @@
 import requests
 
 
-def get_currency_list(token):
-    url = 'https://currate.ru/api/'
-    response = requests.get(url, params={'get': 'currency_list', 'key': token})
+def get_course_list():
+    url = 'https://www.cbr-xml-daily.ru/daily_json.js'
+    response = requests.get(url)
     response.raise_for_status()
     return response.json()
 
