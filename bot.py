@@ -5,6 +5,7 @@ import re
 import calculations
 
 load_dotenv()
+
 currencys = {}
 api_key = os.getenv('API_KEY')
 token = os.getenv('TG_BOT_TOKEN')
