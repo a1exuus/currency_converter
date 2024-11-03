@@ -1,18 +1,14 @@
 import requests
 
-
-def get_course_list():
-    url = 'https://www.cbr-xml-daily.ru/daily_json.js'
+def get_currency_list(api_key):
+    url = f'https://v6.exchangerate-api.com/v6/{api_key}/codes'
     response = requests.get(url)
     response.raise_for_status()
-    return response.json()['Valute']
+    
+    return {currency[0]: currency[1] for currency in response.json()['supported_codes']}
 
-
-def convertation(original, converting_currency, amount):
-    if original == 'BYN':
-        url = f'https://api.nbrb.by/exrates/rates/{converting_currency}?periodicity=0'
-        response = requests.get(url)
-        response.raise_for_status()
-        cource = response.json
-    else:
-        url = ''
+def convertation(original, converting_currency, amount, api_key):
+    url = f'https://v6.exchangerate-api.com/v6/{api_key}/pair/{original}/{converting_currency}/{amount}'
+    response = requests.get(url)
+    response.raise_for_status()
+    return response.json()['conversion_result']
